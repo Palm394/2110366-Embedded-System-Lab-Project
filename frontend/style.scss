@@ -1,8 +1,13 @@
+@font-face {
+    font-family: "chula";
+    src: url("./fonts/CHULALONGKORNReg.otf") format("opentype");
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: aquamarine;
+    background-color: #f988d9;
+    font-family: "chula"; 
 }
 
 .container {
@@ -11,4 +16,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
 }
