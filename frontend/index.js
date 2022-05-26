@@ -15,8 +15,8 @@ const app = initializeApp(firebaseConfig);
 
 const db = getDatabase();
 
-const starCountRef = ref(db, 'count');
-onValue(starCountRef, (snapshot) => {
+const numCountRef = ref(db, 'count');
+onValue(numCountRef, (snapshot) => {
   const data = snapshot.val();
   document.getElementById("Number").innerHTML = data;
 });
