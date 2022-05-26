@@ -1,4 +1,3 @@
-// header("Access-Control-Allow-Origin: *");
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
 import { getDatabase, ref, onValue} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
 
@@ -15,22 +14,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getDatabase();
-
-// var countNumber = document.getElementById("Number");
-
-// function SelectData(){
-//     const dbref = ref(db);
-//     get(child(dbref,"count")).then((snapshot)=>{
-//         if (snapshot.exists()){
-//             let number = snapshot.val();
-//             console.log(number);
-//             document.getElementById("Number").innerHTML = snapshot.val();
-
-//         }
-//     });
-// }
-
-// SelectData();
 
 const starCountRef = ref(db, 'count');
 onValue(starCountRef, (snapshot) => {
