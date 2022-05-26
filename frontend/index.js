@@ -18,7 +18,9 @@ const db = getDatabase();
 const numCountRef = ref(db, 'count');
 onValue(numCountRef, (snapshot) => {
   const data = snapshot.val();
-  if (data >= 10) document.getElementById("Exceed").innerHTML = "Exceed Limit Number"; // change limit number here
+  const limitNum = 5; // change limit number here
+  if (data > limitNum) document.getElementById("Exceed").innerHTML = "Exceed Limit Number";
+  else if (data == limitNum) document.getElementById("Full").innerHTML = "Room Full";
   else document.getElementById("Number").innerHTML = data;
 });
 
