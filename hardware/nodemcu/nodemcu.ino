@@ -24,14 +24,14 @@ void Read_Uart();    // UART STM
 String LED1 = "OFF", LED2 = "OFF";
 int human = 0;
 void setup() {
-//    connectWifi();
+    connectWifi();
     Serial.begin(115200);
     mySerial.begin(115200);
 
-  Serial.println("UART Start");
+    Serial.println("UART Start");
 
-  lastUART = millis();
-//    Firebase.begin(FIREBASE_HOST, FIREBASE_KEY);
+    lastUART = millis();
+    Firebase.begin(FIREBASE_HOST, FIREBASE_KEY);
     mlx.begin();
 }
 
@@ -45,6 +45,8 @@ void loop() {
     callTemp();
 }
 
+String old_st = "start_state";
+
 void Read_Uart()
 {
   String st = "";
@@ -55,9 +57,17 @@ void Read_Uart()
     if (inChar == 'X')
     {
       Serial.println(st);
+      if(old_st != st){
+        old_st = st;
+        String fetchPeopleNumber = st;
+        fetchPeopleNumber[str(fetchPeopleNumber) - 1] = '\0';
+        postValueTofirebase(fetchPeopleNumber);
+      }
       break;
     }
+    
   }
+
 }
 
 void callTemp(){
@@ -76,8 +86,8 @@ void callTemp(){
     delay(500);
 }
 
-void postValueTofirebase(int val){
-    if(Firebase.setInt(firebaseData, "/count", 6)) {
+void postValueTofirebase(String val){
+    if(Firebase.set(firebaseData, "/count", val)) {
         Serial.println("Added");
     } else {
         Serial.println("Error : " + firebaseData.errorReason());
