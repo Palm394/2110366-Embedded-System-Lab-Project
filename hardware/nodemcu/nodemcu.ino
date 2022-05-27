@@ -19,9 +19,9 @@ FirebaseData firebaseData;
 const byte RX = D6;
 const byte TX = D7;
 SoftwareSerial mySerial = SoftwareSerial(RX, TX);
+
 long lastUART = 0;
 void Read_Uart();    // UART STM
-String LED1 = "OFF", LED2 = "OFF";
 int human = 0;
 void setup() {
 //    connectWifi();
@@ -47,7 +47,8 @@ void loop() {
 
 void Read_Uart()
 {
-  String st = "";
+  String st = ""; // จำนวนคนที่รับมาจาก STM32 : "1X, 2X"
+  // oldst != st -> firebase
   while (mySerial.available())
   {
     char inChar = (char)mySerial.read();
