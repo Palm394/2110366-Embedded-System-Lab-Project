@@ -45,23 +45,25 @@ void loop() {
     callTemp();
 }
 
-String old_st = "start_state";
+String old_st = "start_default";
 
 void Read_Uart()
 {
   String st = ""; // จำนวนคนที่รับมาจาก STM32 : "1X, 2X"
+  int cnt = 0;
   // oldst != st -> firebase
   while (mySerial.available())
   {
     char inChar = (char)mySerial.read();
     st +=  inChar;
+    cnt++;
     if (inChar == 'X')
     {
       Serial.println(st);
       if(old_st != st){
         old_st = st;
         String fetchPeopleNumber = st;
-        fetchPeopleNumber[str(fetchPeopleNumber) - 1] = '\0';
+        fetchPeopleNumber[cnt - 1] = '\0';
         postValueTofirebase(fetchPeopleNumber);
       }
       break;
